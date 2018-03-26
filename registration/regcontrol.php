@@ -1,12 +1,11 @@
 <?php
-    include_once "regmodel.php";
+    include_once "../model/modeldb.php";
     $db = 'blog';
-    $host = '127.0.0.1';
+    $host = 'localhost';
     $user = 'root';
     $pass = 'root';
     $charset = 'utf8';
 	$connect = new modeldb($db, $host, $user, $pass, $charset);
-
 	{
 		$pass = $_POST["pass"];
 		$r_pass = $_POST["r_pass"];
@@ -21,7 +20,7 @@
             'lvl' => 'reader'
         ];
 		$connect ->add_user($user);
-        echo ("HELLO".$user['name']);
+        echo ("HELLO ".$user['name'].'!');
 	}
 	if (isset($_POST["reg"]))
 	($connect);

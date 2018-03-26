@@ -1,12 +1,16 @@
 <?php
-    $connect = mysqli_connect("localhost", "root", "root", "blog");
+    include_once "../model/modeldb.php";
 	if (isset($_POST["log"]))
 	{
+        $db = 'blog';
+        $dbhost = 'localhost';
+        $dbuser = 'root';
+        $dbpass = 'root';
+        $dbcharset = 'utf8';
+        $connect = new modeldb($db, $dbhost, $dbuser, $dbpass, $dbcharset);
 		$login = $_POST["login"];
-		$pass = $_POST["password"];
-		$query = mysqli_query($connect,"SELECT * FROM users WHERE login = $login") or die (mysqli_error($connect));
-		$user = mysqli_fetch_array($query);
-		if ($user["password"] === md5($pass)) echo "Hello {$user["username"]} ";
+		$pass = md5($_POST["pass"]);
+		if ($user = $connect ->login_user($login, $pass)) echo "Hello {$user["Username"]} ";
 		else echo "Wrong password or login";
 	}
 	($connect);
