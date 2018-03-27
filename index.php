@@ -1,5 +1,6 @@
 <?php
     session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -12,8 +13,10 @@
     </head>
     <body>
     <nav>
+        <div class="menu">
         <nav><a  href="index.php"> Blog feed </a> | <a href="userpage/userpageview.php"> My blog </a> |
-            <a href="registration/regview.php">Registration</a> | <a href="login/logview.php">Login</a></nav>
+             <a href="registration/regview.php">Registration</a> | <a href="login/logview.php">Login</a></nav>
+        </div>
     </nav>
     </body>
 </html>

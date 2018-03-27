@@ -1,5 +1,5 @@
 <?php
-class anonymous
+class mdAnon
 {
     protected $lvl;
 

@@ -1,5 +1,8 @@
 <?php
-    include_once "../model/modeldb.php";
+    function __autoload($classname) {
+        $filename = "../model/". $classname .".php";
+        include_once($filename);
+    }
 	if (isset($_POST["log"]))
 	{
         $db = 'blog';
@@ -7,13 +10,17 @@
         $dbuser = 'root';
         $dbpass = 'root';
         $dbcharset = 'utf8';
-        $connect = new modeldb($db, $dbhost, $dbuser, $dbpass, $dbcharset);
+        $connect = new mddb($db, $dbhost, $dbuser, $dbpass, $dbcharset);
 		$login = $_POST["login"];
 		$pass = md5($_POST["pass"]);
-		if ($user = $connect ->login_user($login, $pass)) echo "Hello {$user["Username"]} ";
+		if ($user = $connect ->login_user($login, $pass)) {
+		    $logineduser = new mdReader($user['Login'], $user['Password'], $user['Username'], $user['About_me']);
+            echo "Hello {$user["Username"]} ";
+        }
 		else echo "Wrong password or login";
 	}
 	($connect);
+    echo "<a href='../index.php/'>Go back to main page</a>";
 
 // ROUTER in index.php
 // autoload !!! (PSR)
