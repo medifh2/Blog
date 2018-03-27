@@ -19,15 +19,24 @@ class modeldb
     function add_user($user)
     {
         if (!($this -> pdo)) echo "error";
-        $st = ($this -> pdo) -> prepare ("INSERT INTO blog.Users 
-        (Login, Password, Username, About_me, accesslvl) 
-        VALUES (:login, :pass, :uname, :about, :lvl)");
-        $st -> bindParam(':uname', $user['name']);
-        $st -> bindParam(':login', $user['login']);
-        $st -> bindParam(':pass', $user['pass']);
-        $st -> bindParam(':about', $user['about']);
-        $st -> bindParam(':lvl', $user['lvl']);
-        $st -> execute();
+        $st1 = ($this -> pdo) -> prepare ('SELECT Login FROM blog.Users WHERE ((Login = :login) OR (Username = :username))');
+        $st1 -> bindParam(':login', $user['login']);
+        $st1 -> bindParam(':username', $user['name']);
+        $st1 -> execute();
+        $res = $st1 -> fetchAll();
+        if ($res) {echo "Login or is already registered"; return 0;}
+        else {
+            $st = ($this->pdo)->prepare("INSERT INTO blog.Users 
+            (Login, Password, Username, About_me, accesslvl) 
+            VALUES (:login, :pass, :uname, :about, :lvl)");
+            $st->bindParam(':uname', $user['name']);
+            $st->bindParam(':login', $user['login']);
+            $st->bindParam(':pass', $user['pass']);
+            $st->bindParam(':about', $user['about']);
+            $st->bindParam(':lvl', $user['lvl']);
+            $st->execute();
+            return 1;
+        }
     }
     function login_user($login, $pass)
     {

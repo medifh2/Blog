@@ -19,8 +19,7 @@
             'about' => $_POST["about_me"],
             'lvl' => 'reader'
         ];
-		$connect ->add_user($user);
-        echo ("HELLO ".$user['name'].'!');
+		if ($connect ->add_user($user)) echo ("HELLO ".$user['name'].'!');
 	}
 	if (isset($_POST["reg"]))
 	($connect);
