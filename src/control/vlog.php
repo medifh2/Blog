@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 
 <!DOCTYPE html>
 <html>
@@ -13,14 +10,14 @@ session_start();
 <body>
 <nav>
     <div class="menu">
-        <nav><a  href="../../index.php"> Blog feed </a> | <a href="userpageview.php"> My blog </a> |
-            <a href="regview.php">Registration</a> | <a href="logview.php">Login</a></nav>
+        <nav><a  href="../../index.php"> Blog feed </a> | <a href="vuserpage.php"> My blog </a> |
+            <a href="vreg.php">Registration</a> | <a href="vlog.php">Login</a></nav>
     </div>
 </nav>
 </body>
 </html>
 
-<form method = "post" action = "../controll/logcontrol.php">
+<form method = "post" action = "../control/cLog.php">
     <input type = "text" name = "login" placeholder="Login" required/><br>
     <input type = "password" name = "pass" placeholder="Password"  required/><br>
     <input type = "submit" name = "log" value = "Enter"/><br>

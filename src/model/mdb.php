@@ -1,5 +1,5 @@
 <?php
-class mddb
+class mdb
 {
     private $dsn, $opt, $pdo;
 

@@ -10,14 +10,14 @@
         $dbuser = 'root';
         $dbpass = 'root';
         $dbcharset = 'utf8';
-        $connect = new mddb($db, $dbhost, $dbuser, $dbpass, $dbcharset);
+        $connect = new mdb($db, $dbhost, $dbuser, $dbpass, $dbcharset);
 		$login = $_POST["login"];
 		$pass = md5($_POST["pass"]);
 		if ($userdate = $connect ->login_user($login, $pass)) {
             switch ($userdate['accesslvl']) {
-                case 'reader' : $user = new mdReader($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
-                case 'writer' : $user = new mdReader($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
-                case 'admin' : $user = new mdReader($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
+                case 'reader' : $user = new mReader($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
+                case 'writer' : $user = new mWriter($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
+                case 'admin' : $user = new mAdmin($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
          }
 
             echo "Hello {$user["Username"]} ";

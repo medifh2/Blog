@@ -13,14 +13,14 @@ session_start();
 <body>
 <nav>
     <div class="menu">
-        <nav><a  href="../../index.php"> Blog feed </a> | <a href="userpageview.php"> My blog </a> |
-            <a href="regview.php">Registration</a> | <a href="logview.php">Login</a></nav>
+        <nav><a  href="../../index.php"> Blog feed </a> | <a href="vuserpage.php"> My blog </a> |
+            <a href="vreg.php">Registration</a> | <a href="vlog.php">Login</a></nav>
     </div>
 </nav>
 </body>
 </html>
 
-<form method = "post" action = "../controll/regcontrol.php">
+<form method = "post" action = "../control/cReg.php">
     <input type = "text" name = "login" placeholder="Login" required/><br>
     <input type = "text" name = "username" placeholder="Username"  required/><br>
     <input type = "password" name = "pass" placeholder="Password"  required/><br>

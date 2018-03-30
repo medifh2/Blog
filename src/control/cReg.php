@@ -8,7 +8,7 @@
     $user = 'root';
     $pass = 'root';
     $charset = 'utf8';
-	$connect = new mddb($db, $host, $user, $pass, $charset);
+	$connect = new mdb($db, $host, $user, $pass, $charset);
 	{
 		$pass = $_POST["pass"];
 		$r_pass = $_POST["r_pass"];
@@ -24,7 +24,7 @@
         ];
 		if ($connect ->add_user($user))
         {
-            $logineduser = new mdReader($user['login'], $user['pass'], $user['username'], $user['about_me']);
+            $logineduser = new mReader($user['login'], $user['pass'], $user['username'], $user['about_me']);
             echo ("HELLO ".$user['name'].'!');
         }
 	}

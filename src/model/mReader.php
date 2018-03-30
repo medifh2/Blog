@@ -1,6 +1,6 @@
 <?php
-require_once "mdAnon.php";
-class mdReader extends mdAnon
+require_once "mAnon.php";
+class mReader extends mAnon
 {
 protected $login, $pass, $username, $about;
 
