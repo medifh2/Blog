@@ -1,26 +1,23 @@
-<?php
-session_start();
-?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="../../styles/styles.css" rel="stylesheet" media="all">
+    <link href="styles/styles.css" rel="stylesheet" media="all">
     <title>Blog</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../../styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 <body>
 <nav>
     <div class="menu">
-        <nav><a  href="../../index.php"> Blog feed </a> | <a href="vuserpage.php"> My blog </a> |
-            <a href="vreg.php">Registration</a> | <a href="vlog.php">Login</a></nav>
+        <nav><a  href="/"> Blog feed </a> | <a href="/userpage"> My blog </a> |
+            <a href="/registration">Registration</a> | <a href="/login">Login</a></nav>
     </div>
 </nav>
 </body>
 </html>
 
-<form method = "post" action = "../control/cReg.php">
+<form method = "post" action = "../../control/cReg.php">
     <input type = "text" name = "login" placeholder="Login" required/><br>
     <input type = "text" name = "username" placeholder="Username"  required/><br>
     <input type = "password" name = "pass" placeholder="Password"  required/><br>

@@ -1,15 +1,22 @@
 <?php
 namespace control;
-require '../view/vlog.php';
+
 class cUser {
 
     public function showloginpage()
     {
-        $f = fopen('vlog.php', "rt") or die("Ошибка!");
-        $loginpage = file_get_contents($f);
-        echo $loginpage;
+        include __DIR__.'/../view/vlog.php';
     }
 
+    public function showregpage()
+    {
+        include __DIR__.'/../view/vreg.php';
+    }
+
+    public function showuserpage()
+    {
+        include __DIR__.'/../view/vuserpage.php';
+    }
 }
 // ROUTER in index.php
 // autoload !!! (PSR)

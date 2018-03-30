@@ -6,18 +6,10 @@ class cmainpage {
     {
 
     }
-    public function index()
+    public function showmainpage()
     {
-        $test = 'mainpage';
-        echo "index";
-        return $test;
+        include __DIR__.'/../view/vmainpage.php';
     }
-    public function login()
-    {
-        $test = 'login';
-        return $test;
-    }
-
 }
 // ROUTER in index.php
 // autoload !!! (PSR)

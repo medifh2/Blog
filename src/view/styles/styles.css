@@ -1,0 +1,15 @@
+﻿﻿@import url("//fonts.googleapis.com/css?family=Open+Sans");
+
+body {
+    background: rgb(38, 137, 57);
+}
+a {
+    color: red;
+    text-decoration: none;
+}
+a:visited {
+    color: red;
+}
+a:active {
+    color: red;
+}
