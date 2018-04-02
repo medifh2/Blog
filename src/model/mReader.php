@@ -1,10 +1,10 @@
 <?php
+namespace model;
 require_once "mAnon.php";
 class mReader extends mAnon
 {
 protected $login, $pass, $username, $about;
 
-    public
     function __construct($login, $pass, $username, $about)
     {
         $this -> login = $login;

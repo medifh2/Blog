@@ -1,9 +1,10 @@
 <?php
+namespace model;
+use PDO;
 class mdb
 {
     private $dsn, $opt, $pdo;
 
-    public
     function __construct($db, $host, $user, $pass, $charset)
     {
         $this -> dsn = "mysql:host = $host; db = $db; charset = $charset";
@@ -24,7 +25,7 @@ class mdb
         $st1 -> bindParam(':username', $user['name']);
         $st1 -> execute();
         $res = $st1 -> fetchAll();
-        if ($res) {echo "Login or is already registered"; return 0;}
+        if ($res) { return 0;}
         else {
             $st = ($this->pdo)->prepare("INSERT INTO blog.Users 
             (Login, Password, Username, About_me, accesslvl) 
@@ -38,6 +39,7 @@ class mdb
             return 1;
         }
     }
+
     function login_user($login, $pass)
     {
         $st = ($this -> pdo) -> prepare ('SELECT * FROM blog.Users WHERE ((Login = :login) AND (Password = :pass))');

@@ -1,3 +1,5 @@
+﻿<style>
+
 body {
     background: gainsboro;
 }
@@ -11,11 +13,5 @@ a:visited {
 a:active {
     color: red;
 }
-button {
-    width: 15%;
-    podding: 10px;
-    background: #fff;
-    margin-top: 10px;
-    border: 2px solid red;
-}
 
+</style>

@@ -1,4 +1,5 @@
 <?php
+namespace model;
 class mAnon
 {
     protected $lvl;

@@ -1,5 +1,6 @@
 <?php
 namespace control;
+use view\View;
 class cmainpage {
 
     function __construct()
@@ -8,7 +9,8 @@ class cmainpage {
     }
     public function showmainpage()
     {
-        include __DIR__.'/../view/vmainpage.php';
+        $viewgen = new View;
+        $viewgen -> pagegenerate ('vmainpage.php');
     }
 }
 // ROUTER in index.php
