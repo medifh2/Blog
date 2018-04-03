@@ -1,7 +1,7 @@
 <?php
 namespace control;
 use view\View;
-class cmainpage {
+class MainpageController {
 
     function __construct()
     {
@@ -10,7 +10,7 @@ class cmainpage {
     public function showmainpage()
     {
         $viewgen = new View;
-        $viewgen -> pagegenerate ('vmainpage.php');
+        $viewgen -> pagegenerate ('MainpageView.html');
     }
 }
 // ROUTER in index.php

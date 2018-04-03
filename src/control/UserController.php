@@ -1,29 +1,37 @@
 <?php
 namespace control;
 use view\View;
-use model\mdb;
-use model\mReader;
-use model\mWriter;
-use model\mAdmin;
-class cUser {
+use model\DbModel;
+use model\ReaderModel;
+use model\WriterModel;
+use model\AdminModel;
+class UserController {
 
     public function showloginpage()
     {
         $viewgen = new View;
-        $viewgen -> pagegenerate ('vlog.php');
+        $viewgen -> pagegenerate ('LogView.html');
     }
 
     public function showregpage()
     {
         $viewgen = new View;
-        $viewgen -> pagegenerate ('vreg.php');
+        $viewgen -> pagegenerate ('RegView.html');
     }
 
     public function showuserpage()
     {
         $viewgen = new View;
-        $viewgen -> pagegenerate ('vuserpage.php');
+        $viewgen -> pagegenerate ('UserpageView.html');
     }
+
+    public function logout()
+    {
+        $_SESSION['is_login'] = 0;
+        $viewgen = new View;
+        $viewgen -> pagegenerate ('MainpageView.html');
+    }
+
     public function login()
     {
         if (isset($_POST["log"]))
@@ -33,22 +41,25 @@ class cUser {
             $dbuser = 'root';
             $dbpass = 'root';
             $dbcharset = 'utf8';
-            $connect = new mdb($db, $dbhost, $dbuser, $dbpass, $dbcharset);
+            $connect = new DbModel($db, $dbhost, $dbuser, $dbpass, $dbcharset);
             $login = $_POST["login"];
             $pass = md5($_POST["pass"]);
             if ($userdate = $connect -> login_user($login, $pass)) {
                 switch ($userdate['accesslvl']) {
-                    case 'reader' : $user = new mReader($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
-                    case 'writer' : $user = new mWriter($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
-                    case 'admin' : $user = new mAdmin($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
+                    case 'reader' : $user = new ReaderModel($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
+                    case 'writer' : $user = new WriterModel($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
+                    case 'admin' : $user = new AdminModel($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
                 }
                 echo "Hello {$user["Username"]} ";
             }
             else echo "Wrong password or login";
         }
         ($connect);
+        $_SESSION['is_login'] = 1;
+        $_SESSION['userdate'] = $userdate[0];
         $viewgen = new View;
-        $viewgen -> pagegenerate ('vmainpage.php');
+        $viewgen -> pagegenerate ('vmainpage.html');
+
     }
     public function registration()
     {
@@ -58,7 +69,7 @@ class cUser {
         $user = 'root';
         $pass = 'root';
         $charset = 'utf8';
-        $connect = new mdb($db, $host, $user, $pass, $charset);
+        $connect = new DbModel($db, $host, $user, $pass, $charset);
         {
             str_replace(' ','',$_POST["pass"]);
             str_replace(' ','',$_POST["r_pass"]);
@@ -83,7 +94,7 @@ class cUser {
                 ];
             if ($connect ->add_user($user))
             {
-                $logineduser = new mReader($user['login'], $user['pass'], $user['username'], $user['about_me']);
+                $logineduser = new ReaderModel($user['login'], $user['pass'], $user['username'], $user['about_me']);
                 echo ("HELLO ".$user['name'].'!');
             }
             else {
@@ -93,6 +104,6 @@ class cUser {
         }
         if (isset($_POST["reg"]))
             ($connect);
-        $viewgen -> pagegenerate ('vmainpage.php');
+        $viewgen -> pagegenerate ('vmainpage.html');
     }
 }

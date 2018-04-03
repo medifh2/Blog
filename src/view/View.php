@@ -4,8 +4,12 @@ class View
 {
     public function pagegenerate ($file)
     {
-        include 'styles/styles.php';
-        include 'vtop.php';
+        if ($_SESSION['is_login'])
+        {
+            include 'UtopView.html';
+        }
+        else include 'TopView.html';
+
         include $file;
     }
 }

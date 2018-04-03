@@ -1,6 +1,6 @@
 <?php
 namespace model;
-class mAnon
+class AnonModel
 {
     protected $lvl;
 

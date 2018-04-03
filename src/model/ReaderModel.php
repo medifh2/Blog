@@ -1,10 +1,10 @@
 <?php
-require_once "mdAnon.php";
-class mdReader extends mdAnon
+namespace model;
+require_once "AnonModel.php";
+class ReaderModel extends AnonModel
 {
 protected $login, $pass, $username, $about;
 
-    public
     function __construct($login, $pass, $username, $about)
     {
         $this -> login = $login;

@@ -1,7 +1,7 @@
 <?php
 namespace model;
 use PDO;
-class mdb
+class DbModel
 {
     private $dsn, $opt, $pdo;
 

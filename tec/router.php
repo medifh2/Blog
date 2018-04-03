@@ -7,12 +7,13 @@
         {
             $route = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
             $routing = [
-                '/' => ['control' => 'cmainpage', 'action' => 'showmainpage'],
-                '/login' => ['control' => 'cUser', 'action' => 'showloginpage'],
-                '/registration' => ['control' => 'cUser', 'action' => 'showregpage'],
-                '/userpage' => ['control' => 'cUser', 'action' => 'showuserpage'],
-                '/loguser' => ['control' => 'cUser', 'action' => 'login'],
-                '/reguser' => ['control' => 'cUser', 'action' => 'registration']
+                '/' => ['control' => 'MainpageController', 'action' => 'showmainpage'],
+                '/login' => ['control' => 'UserController', 'action' => 'showloginpage'],
+                '/registration' => ['control' => 'UserController', 'action' => 'showregpage'],
+                '/userpage' => ['control' => 'UserController', 'action' => 'showuserpage'],
+                '/loguser' => ['control' => 'UserController', 'action' => 'login'],
+                '/reguser' => ['control' => 'UserController', 'action' => 'registration'],
+                '/logout' => ['control' => 'UserController', 'action' => 'logout']
             ];
             if(isset($routing[$route]))
             {
