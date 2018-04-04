@@ -13,7 +13,8 @@
                 '/userpage' => ['control' => 'UserController', 'action' => 'showuserpage'],
                 '/loguser' => ['control' => 'UserController', 'action' => 'login'],
                 '/reguser' => ['control' => 'UserController', 'action' => 'registration'],
-                '/logout' => ['control' => 'UserController', 'action' => 'logout']
+                '/logout' => ['control' => 'UserController', 'action' => 'logout'],
+                '/changeabout' => ['control' => 'UserController', 'action' => 'changeabout']
             ];
             if(isset($routing[$route]))
             {

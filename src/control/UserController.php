@@ -5,6 +5,7 @@ use model\DbModel;
 use model\ReaderModel;
 use model\WriterModel;
 use model\AdminModel;
+use conf\DbConf;
 class UserController {
 
     public function showloginpage()
@@ -36,51 +37,45 @@ class UserController {
     {
         if (isset($_POST["log"]))
         {
-            $db = 'blog';
-            $dbhost = 'localhost';
-            $dbuser = 'root';
-            $dbpass = 'root';
-            $dbcharset = 'utf8';
-            $connect = new DbModel($db, $dbhost, $dbuser, $dbpass, $dbcharset);
+            $viewgen = new View;
+            $dbconf = new DbConf;
+            $connect = new DbModel($dbconf);
             $login = $_POST["login"];
             $pass = md5($_POST["pass"]);
             if ($userdate = $connect -> login_user($login, $pass)) {
+
                 switch ($userdate['accesslvl']) {
                     case 'reader' : $user = new ReaderModel($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
                     case 'writer' : $user = new WriterModel($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
                     case 'admin' : $user = new AdminModel($userdate['Login'], $userdate['Password'], $userdate['Username'], $userdate['About_me']); break;
                 }
-                echo "Hello {$user["Username"]} ";
             }
             else echo "Wrong password or login";
         }
         ($connect);
         $_SESSION['is_login'] = 1;
-        $_SESSION['userdate'] = $userdate[0];
-        $viewgen = new View;
-        $viewgen -> pagegenerate ('vmainpage.html');
+        $_SESSION['user'] = $user;
+        $_SESSION['Userdata'] = $user -> allData();
+        print_r($_SESSION['Userdata']);
+        $viewgen -> pagegenerate ('MainpageView.html');
 
     }
     public function registration()
     {
         $viewgen = new View;
-        $db = 'blog';
-        $host = 'localhost';
-        $user = 'root';
-        $pass = 'root';
-        $charset = 'utf8';
-        $connect = new DbModel($db, $host, $user, $pass, $charset);
+        $dbconf = new DbConf;
+        $connect = new DbModel($dbconf);
         {
-            str_replace(' ','',$_POST["pass"]);
-            str_replace(' ','',$_POST["r_pass"]);
-            str_replace(' ','',$_POST["login"]);
-            str_replace(' ','',$_POST["username"]);
+            $_POST["pass"] = str_replace(' ','',$_POST["pass"]);
+            $_POST["r_pass"] = str_replace(' ','',$_POST["r_pass"]);
+            $_POST["login"] = str_replace(' ','',$_POST["login"]);
+            $_POST["username"] = str_replace(' ','',$_POST["username"]);
             $pass = $_POST["pass"];
             $r_pass = $_POST["r_pass"];
-
-            if (($pass == " ")||($_POST["login"] == " ")||($_POST["username"] == " ")||($pass !== $r_pass))
+            if (!$pass || !$_POST["login"] || !$_POST["username"] || ($pass !== $r_pass))
             {
-                $viewgen -> pagegenerate ('vreg.php');
+                $viewgen -> pagegenerate ('RegView.html');
+                print_r($_POST["username"]);
                 die ("incorrect data!");
             }
             $pass = md5($pass);
@@ -88,22 +83,22 @@ class UserController {
                 [
                     'login' => $_POST["login"],
                     'pass' =>$pass,
-                    'name' => $_POST["username"],
-                    'about' => $_POST["about_me"],
+                    'username' => $_POST["username"],
+                    'about_me' => $_POST["about_me"],
                     'lvl' => 'reader'
                 ];
-            if ($connect ->add_user($user))
+            if ($connect -> add_user($user))
             {
-                $logineduser = new ReaderModel($user['login'], $user['pass'], $user['username'], $user['about_me']);
-                echo ("HELLO ".$user['name'].'!');
+                $user = new ReaderModel($user['login'], $user['pass'], $user['username'], $user['about_me']);
+                $_SESSION['is_login'] = 1;
+                $_SESSION['user'] = $user;
+                $_SESSION['Userdata'] = $user -> allData();
+                $viewgen -> pagegenerate ('MainpageView.html');
             }
             else {
-                $viewgen -> pagegenerate ('vreg.php');
+                $viewgen -> pagegenerate ('RegView.html');
                 die ("A User with such data is already registered!");
             }
         }
-        if (isset($_POST["reg"]))
-            ($connect);
-        $viewgen -> pagegenerate ('vmainpage.html');
     }
 }

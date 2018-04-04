@@ -5,6 +5,7 @@ class ReaderModel extends AnonModel
 {
 protected $login, $pass, $username, $about;
 
+
     function __construct($login, $pass, $username, $about)
     {
         $this -> login = $login;
@@ -12,6 +13,18 @@ protected $login, $pass, $username, $about;
         $this -> username = $username;
         $this -> about = $about;
         $this -> lvl = "reader";
+    }
+
+    public
+    function allData()
+    {
+        $res =[
+            'Username' => $this -> username,
+            'About_me' => $this -> about,
+            'Lvl' => $this -> lvl,
+
+        ];
+        return $res;
     }
 
 }

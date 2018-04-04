@@ -1,2 +1,4 @@
 <!DOCTYPE html>
-It's your profile<?php if ($_SESSION['is_login']) echo ', '.($_SESSION['userdate']['Username']) ?>
+It's your profile<?php echo ', '.($_SESSION['Userdata']['Username']) ?><br>
+About me : <input type = "password" name = "pass" placeholder= <?php echo $_SESSION['Userdata']['About_me'] ?>  required/><br>
+<input type = "submit" value = "Change"/><br>

@@ -1,20 +1,23 @@
 <?php
 namespace model;
 use PDO;
+use conf\Dbconf;
 class DbModel
 {
     private $dsn, $opt, $pdo;
 
-    function __construct($db, $host, $user, $pass, $charset)
+    function __construct($dbconf)
     {
-        $this -> dsn = "mysql:host = $host; db = $db; charset = $charset";
+        $dbconf = $dbconf -> getData();
+        $this -> dsn = "mysql:host = {$dbconf['host']}; db = {$dbconf['name']}; 
+        charset = {$dbconf['charset']}";
         $this -> opt =
         [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES   => false,
         ];
-        $this -> pdo = new PDO($this -> dsn, $user, $pass, $this -> opt);
+        $this -> pdo = new PDO($this -> dsn, $dbconf['user'], $dbconf['pass'], $this -> opt);
     }
 
     function add_user($user)
@@ -22,7 +25,7 @@ class DbModel
         if (!($this -> pdo)) echo "error";
         $st1 = ($this -> pdo) -> prepare ('SELECT Login FROM blog.Users WHERE ((Login = :login) OR (Username = :username))');
         $st1 -> bindParam(':login', $user['login']);
-        $st1 -> bindParam(':username', $user['name']);
+        $st1 -> bindParam(':username', $user['username']);
         $st1 -> execute();
         $res = $st1 -> fetchAll();
         if ($res) { return 0;}
@@ -30,10 +33,10 @@ class DbModel
             $st = ($this->pdo)->prepare("INSERT INTO blog.Users 
             (Login, Password, Username, About_me, accesslvl) 
             VALUES (:login, :pass, :uname, :about, :lvl)");
-            $st->bindParam(':uname', $user['name']);
+            $st->bindParam(':uname', $user['username']);
             $st->bindParam(':login', $user['login']);
             $st->bindParam(':pass', $user['pass']);
-            $st->bindParam(':about', $user['about']);
+            $st->bindParam(':about', $user['about_me']);
             $st->bindParam(':lvl', $user['lvl']);
             $st->execute();
             return 1;
@@ -47,7 +50,7 @@ class DbModel
         $st -> bindParam(':pass', $pass);
         $st -> execute();
         $res = $st -> fetchAll();
-        echo ($res['0']['Username']);
+        $res = $res[0];
         return $res;
     }
 }
