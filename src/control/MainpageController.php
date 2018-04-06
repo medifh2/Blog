@@ -1,13 +1,13 @@
 <?php
 namespace control;
 use view\View;
-class MainpageController {
+class MainPageController {
 
     function __construct()
     {
 
     }
-    public function showmainpage()
+    public function showMainPage()
     {
         $viewgen = new View;
         $viewgen -> pagegenerate ('MainpageView.html');

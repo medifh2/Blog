@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+<form class="about_form" action="" method="post" name="contact_form">
+    <ul>
+
+        <li>
+            <label for="username">Username:</label>
+            <input type = "text" name = "username" placeholder="New Username"  required/><br>
+        </li>
+
+        <li>
+            <label for="n-pas">Password</label>
+            <input type = "password" name = "n_pass" placeholder="New password"  required/><br>
+        </li>
+
+        <li>
+            <label for="about">About me:</label>
+            <textarea name = "about" cols = "60" rows = "15">
+            <?php echo $_SESSION['Userdata']['About_me'] ?>
+            </textarea><br>
+        </li>
+
+        <li>
+        <button class="submit" type="submit">Save changes</button>
+        </li>
+
+    </ul>
+</form>
+</body>
+</html>

@@ -1,4 +1,11 @@
 <!DOCTYPE html>
-It's your profile<?php echo ', '.($_SESSION['Userdata']['Username']) ?><br>
-About me : <input type = "password" name = "pass" placeholder= <?php echo $_SESSION['Userdata']['About_me'] ?>  required/><br>
-<input type = "submit" value = "Change"/><br>
+<html>
+    <body>
+    <P class = content>
+        It's your profile<?php echo ', '.($_SESSION['Userdata']['Username']) ?><br>
+        About you: <?php echo ' '.($_SESSION['Userdata']['About_me']) ?><br>
+        Your posts:<br>
+        <a  href = "/settings"> Изменить </a>
+    </P>
+    </body>
+</html>

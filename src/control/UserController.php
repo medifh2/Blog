@@ -8,19 +8,25 @@ use model\AdminModel;
 use conf\DbConf;
 class UserController {
 
-    public function showloginpage()
+    public function showLoginPage()
     {
         $viewgen = new View;
         $viewgen -> pagegenerate ('LogView.html');
     }
 
-    public function showregpage()
+    public function showSettings()
     {
         $viewgen = new View;
-        $viewgen -> pagegenerate ('RegView.html');
+        $viewgen -> pagegenerate ('UserpageSettingsView.html');
     }
 
-    public function showuserpage()
+    public function showRegPage()
+    {
+        $viewgen = new View;
+        $viewgen -> pageGenerate ('RegView.html');
+    }
+
+    public function showUserPage()
     {
         $viewgen = new View;
         $viewgen -> pagegenerate ('UserpageView.html');
