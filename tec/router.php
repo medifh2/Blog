@@ -1,5 +1,6 @@
 <?php
     namespace tec;
+    use view\View;
     class router
     {
         public
@@ -7,14 +8,16 @@
         {
             $route = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
             $routing = [
-                '/' => ['control' => 'MainpageController', 'action' => 'showmainpage'],
-                '/login' => ['control' => 'UserController', 'action' => 'showloginpage'],
-                '/registration' => ['control' => 'UserController', 'action' => 'showregpage'],
-                '/userpage' => ['control' => 'UserController', 'action' => 'showuserpage'],
+                '/' => ['control' => 'MainpageController', 'action' => 'showMainPage'],
+                '/login' => ['control' => 'UserController', 'action' => 'showLoginPage'],
+                '/registration' => ['control' => 'UserController', 'action' => 'showRegPage'],
+                '/userpage' => ['control' => 'UserController', 'action' => 'showUserPage'],
                 '/loguser' => ['control' => 'UserController', 'action' => 'login'],
                 '/reguser' => ['control' => 'UserController', 'action' => 'registration'],
+                '/edituser' => ['control' => 'UserController', 'action' => 'editUserData'],
                 '/logout' => ['control' => 'UserController', 'action' => 'logout'],
-                '/changeabout' => ['control' => 'UserController', 'action' => 'changeabout']
+                '/changeabout' => ['control' => 'UserController', 'action' => 'changeAbout'],
+                '/settings' => ['control' => 'UserController', 'action' => 'showSettings']
             ];
             if(isset($routing[$route]))
             {
@@ -23,7 +26,10 @@
                 $act = $routing[$route]['action'];
                 $controller_obj -> $act();
             }
-            else echo $route.' not found';
+            else {
+                $viewgen = new View;
+                $viewgen -> pagegenerate ('Error404View.html');
+            }
         }
     }
 

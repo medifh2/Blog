@@ -1,5 +1,6 @@
 <?php
 namespace model;
+
 require_once "AnonModel.php";
 class ReaderModel extends AnonModel
 {
@@ -19,10 +20,10 @@ protected $login, $pass, $username, $about;
     function allData()
     {
         $res =[
+            'Login' => $this -> login,
             'Username' => $this -> username,
             'About_me' => $this -> about,
             'Lvl' => $this -> lvl,
-
         ];
         return $res;
     }

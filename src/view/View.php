@@ -1,8 +1,9 @@
 <?php
 namespace view;
+
 class View
 {
-    public function pagegenerate ($file)
+    public function pageGenerate ($file)
     {
             if ($_SESSION['is_login']) {
                 include 'UtopView.html';

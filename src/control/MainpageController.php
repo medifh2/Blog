@@ -1,5 +1,6 @@
 <?php
 namespace control;
+
 use view\View;
 class MainPageController {
 
@@ -9,8 +10,8 @@ class MainPageController {
     }
     public function showMainPage()
     {
-        $viewgen = new View;
-        $viewgen -> pagegenerate ('MainpageView.html');
+        $view_gen = new View;
+        $view_gen -> pageGenerate ('MainpageView.html');
     }
 }
 // ROUTER in index.php
